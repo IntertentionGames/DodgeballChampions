@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Debug.h"
+#include "SM_Actor.h"
 
 
 // Sets default values for this component's properties
-UDebug::UDebug()
+USM_Actor::USM_Actor()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
@@ -15,20 +15,20 @@ UDebug::UDebug()
 
 
 // Called when the game starts
-void UDebug::BeginPlay()
+void USM_Actor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UE_LOG(LogTemp, Warning, TEXT("Ry's Mac is ass"));
-	UE_LOG(LogTemp, Error, TEXT("LET THE GAMES BEGIN!!"))
+	// ...
+	
 }
 
 
 // Called every frame
-void UDebug::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void USM_Actor::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	
+	// ...
 }
 
