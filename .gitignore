@@ -6,15 +6,13 @@
 */DerivedDataCache
 */Intermediate
 */Saved
-
+DodgeballChampions/Content/StarterContent/
 
 ##########################
 # Unreal Generated Files #
 ##########################
 *.VC.db
 *.VC.opendb
-DodgeballChampions/.vs/BuildingEscape/v15/Solution.VC.db-shm
-DodgeballChampions/.vs/BuildingEscape/v15/Solution.VC.db-wal
 *.ipch
 *.suo
 *.sln
