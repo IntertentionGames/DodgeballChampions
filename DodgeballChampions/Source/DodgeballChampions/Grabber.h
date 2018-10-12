@@ -3,9 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "PhysicsEngine/PhysicsHandleComponent.h"
-#include "Components/InputComponent.h"
 #include "Components/ActorComponent.h"
+#include "Engine/World.h"
+#include "DrawDebugHelpers.h"
+#include "PhysicsEngine/PhysicsHandleComponent.h"
 #include "Grabber.generated.h"
 
 
@@ -14,29 +15,40 @@ class DODGEBALLCHAMPIONS_API UGrabber : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
+public:
 	// Sets default values for this component's properties
 	UGrabber();
 
-protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
-    
-public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 private:
-    float Reach = 500.f;
-    
-    UPhysicsHandleComponent* PhisicsHandle = nullptr;
-    
-    
-    UInputComponent* InputComponents = nullptr;
-    
-    void Grab();
-    
-    void Released();
-    
-    
+	float Reach = 600;
+
+	UPhysicsHandleComponent* PhysicsHandle = nullptr;
+
+	UInputComponent* Input = nullptr;
+
+	//Ray-Cast and grab what is in reach
+	void Grab();
+
+	void Release();
+
+	//Find Physics Handle
+	void FindPhysicsHandleComponent();
+
+	//Setup Input component
+	void SetupInputComponent();
+
+	//Return hit for first physics body in reach
+	FHitResult GetFirstPhysicsBodyHit() const;
+
+	FTwoVectors GetLineTracePoints() const;
+
+
+
+protected:
+	// Called when the game starts
+	virtual void BeginPlay() override;
+
 };
