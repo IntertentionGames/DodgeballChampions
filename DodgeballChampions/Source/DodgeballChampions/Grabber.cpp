@@ -58,7 +58,7 @@ void UGrabber::Grab(){
     if (ActorHit){
     }
     
-    PhisicsHandle->GrabComponentAtLocation(, NAME_None, PlayerViewPointLocation);
+    PhisicsHandle->GrabComponentAtLocation(, NAME_None, GetActorl);
     
 
 void UGrabber::Released(){
