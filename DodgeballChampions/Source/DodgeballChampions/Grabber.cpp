@@ -22,6 +22,9 @@ void UGrabber::BeginPlay()
     PhisicsHandle = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
     if(PhisicsHandle){
         
+        
+        
+        
     }
     
     InputComponents = GetOwner()->FindComponentByClass<UInputComponent>();
@@ -35,6 +38,7 @@ void UGrabber::BeginPlay()
 
 
 void UGrabber::Grab(){
+    //Could be refactored
     FVector PlayerViewPointLocation;
     FRotator PlayerViewPointRotation;
     
@@ -52,17 +56,15 @@ void UGrabber::Grab(){
     
     AActor* ActorHit = LineTraceHit .GetActor();
     if (ActorHit){
-        UE_LOG(LogTemp,Warning,TEXT("%s"),*(ActorHit->GetName()))
     }
-    }
+    
+    PhisicsHandle->GrabComponentAtLocation(, NAME_None, PlayerViewPointLocation);
+    
 
 void UGrabber::Released(){
      UE_LOG(LogTemp, Warning, TEXT("Released"));
     
 }
-
-
-   
 
 
 
@@ -71,9 +73,6 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-    
+}
 
-
-    }
-    
 
