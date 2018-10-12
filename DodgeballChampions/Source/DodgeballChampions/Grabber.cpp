@@ -13,7 +13,7 @@ UGrabber::UGrabber()
 	// ...
 }
 
-//NO IMPUT COMPONENT IN THE GAME YET I THINK
+
 // Called when the game starts
 void UGrabber::BeginPlay()
 {
@@ -24,24 +24,19 @@ void UGrabber::BeginPlay()
         
     }
     
-    //InputComponent = GetOwner()->FindComponentByClass<UInputComponent>();
-    //if  (InputComponent){
+    InputComponents = GetOwner()->FindComponentByClass<UInputComponent>();
+    if  (InputComponents){
         
-    //}
-    
+        InputComponents->BindAction("Grab", IE_Pressed, this, &UGrabber::Grab);
+        InputComponents->BindAction("Release", IE_Released, this, &UGrabber::Released);
+}
     
 }
 
 
-// Called every frame
-void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-    
-    
-     FVector PlayerViewPointLocation;
-     FRotator PlayerViewPointRotation;
+void UGrabber::Grab(){
+    FVector PlayerViewPointLocation;
+    FRotator PlayerViewPointRotation;
     
     GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(PlayerViewPointLocation, PlayerViewPointRotation);
     
@@ -59,4 +54,26 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
     if (ActorHit){
         UE_LOG(LogTemp,Warning,TEXT("%s"),*(ActorHit->GetName()))
     }
+    }
+
+void UGrabber::Released(){
+     UE_LOG(LogTemp, Warning, TEXT("Released"));
+    
 }
+
+
+   
+
+
+
+// Called every frame
+void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+    
+
+
+    }
+    
+
