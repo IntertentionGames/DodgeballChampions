@@ -22,6 +22,10 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+    
+    
+    
+    
 private:
 	float Reach = 600;
 
@@ -29,6 +33,9 @@ private:
 
 	UInputComponent* Input = nullptr;
 
+    //UStaticMeshComponent* MeshRootComponent 
+    
+    
 	//Ray-Cast and grab what is in reach
 	void Grab();
 
@@ -41,11 +48,11 @@ private:
 	void SetupInputComponent();
 
 	//Return hit for first physics body in reach
-	FHitResult GetFirstPhysicsBodyHit() const;
+	FHitResult GetFirstPhysicsBodyHit() ;
 
 	FTwoVectors GetLineTracePoints() const;
 
-
+    
 
 protected:
 	// Called when the game starts
