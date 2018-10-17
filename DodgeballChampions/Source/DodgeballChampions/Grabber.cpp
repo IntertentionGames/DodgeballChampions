@@ -61,14 +61,16 @@ void UGrabber::Grab()
     
 if (ActorHit) //if we hit something
 	{
+		FName handsocket = TEXT("hand_rSocket");
+
+		
+
 		PhysicsHandle->GrabComponentAtLocationWithRotation(
 			ComponentToGrab,
-			NAME_None,
+			handsocket,
 			ComponentToGrab->GetOwner()->GetActorLocation(),
 			ComponentToGrab->GetOwner()->GetActorRotation()
-    
-                                                           
-);
+		);
 
         
         
@@ -101,8 +103,6 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-
-
 	if (!PhysicsHandle) { return; }
 
 	//if the physics handle is attached
@@ -110,6 +110,18 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	{
 		PhysicsHandle->SetTargetLocation(GetLineTracePoints().v2);
 	}
+
+		FTwoVectors TracePoints = GetLineTracePoints();
+		DrawDebugLine(
+		GetWorld(),
+		TracePoints.v1,
+		TracePoints.v2,
+		FColor(255, 0, 0),
+		false,
+		0.f,
+		0.f,
+		10.f
+	);
 
 
 }
@@ -138,7 +150,7 @@ FTwoVectors UGrabber::GetLineTracePoints() const
 {
 	FVector StartLocation;
 	FRotator PlayerViewPointRotation;
-	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
+	GetOwner()->GetActorEyesViewPoint(
 		OUT StartLocation,
 		OUT PlayerViewPointRotation
 	);

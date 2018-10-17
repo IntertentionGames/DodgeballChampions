@@ -7,6 +7,8 @@
 #include "Engine/World.h"
 #include "DrawDebugHelpers.h"
 #include "PhysicsEngine/PhysicsHandleComponent.h"
+#include "Runtime/Engine/Classes/Engine/SkeletalMeshSocket.h"
+#include "Runtime/Engine/Classes/GameFramework/Character.h"
 #include "Grabber.generated.h"
 
 
@@ -27,7 +29,7 @@ public:
     
     
 private:
-	float Reach = 600;
+	float Reach = 300;
 
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
 
