@@ -28,6 +28,7 @@ void UGrabber::FindPhysicsHandleComponent()
 	{
 		FString Name = GetOwner()->GetName();
 		UE_LOG(LogTemp, Error, TEXT("No component was found for %s!"), *Name);
+        
 	}
 
 }
@@ -41,7 +42,7 @@ void UGrabber::SetupInputComponent()
 		UE_LOG(LogTemp, Warning, TEXT("Input success!"));
 		///Bind the input axis
 		Input->BindAction("Grab", IE_Pressed, this, &UGrabber::Grab);
-		Input->BindAction("Grab", IE_Released, this, &UGrabber::Release);
+		Input->BindAction("Release", IE_Released, this, &UGrabber::Release);
 	}
 	else {}
 }
@@ -54,24 +55,45 @@ void UGrabber::Grab()
 	auto HitResult = GetFirstPhysicsBodyHit();
 	auto ComponentToGrab = HitResult.GetComponent(); //gets the mesh in our case
 	auto ActorHit = HitResult.GetActor();
-	
-
-	if (ActorHit) //if we hit something
+    
+    
+  
+    
+if (ActorHit) //if we hit something
 	{
 		PhysicsHandle->GrabComponentAtLocationWithRotation(
 			ComponentToGrab,
 			NAME_None,
-			ComponentToGrab->GetOwner()->GetActorLocation() + (0,0,-70),
-			ComponentToGrab->GetOwner()->GetActorRotation()*0
-		);
-	}
+			ComponentToGrab->GetOwner()->GetActorLocation(),
+			ComponentToGrab->GetOwner()->GetActorRotation()
+    
+                                                           
+);
+
+        
+        
+        
+    }
 }
 
 void UGrabber::Release()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Grab Released"))
-
-		PhysicsHandle->ReleaseComponent();
+auto HitResult = GetFirstPhysicsBodyHit();
+auto ActorHit = HitResult.GetActor();
+auto ComponentToGrab = HitResult.GetComponent();
+    int Rate = 3000;
+    
+   if(ActorHit)
+   {
+       PhysicsHandle->ReleaseComponent();
+       ComponentToGrab->AddImpulse(GetWorld()->GetFirstPlayerController()->AActor::GetActorForwardVector()* Rate,NAME_None,true);
+   }
+    
+    
+    
+    
+    
 }
 
 // Called every frame
@@ -92,7 +114,7 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 
 }
 
-FHitResult UGrabber::GetFirstPhysicsBodyHit() const
+FHitResult UGrabber::GetFirstPhysicsBodyHit() 
 {
 	FHitResult HitResult;
 	FCollisionQueryParams TraceParams(FName(TEXT("")), false, GetOwner());
@@ -103,7 +125,12 @@ FHitResult UGrabber::GetFirstPhysicsBodyHit() const
 		TracePoints.v2,
 		FCollisionObjectQueryParams(ECollisionChannel::ECC_PhysicsBody),
 		TraceParams
-	);
+	
+ 
+                                            
+                                            
+                                            
+);
 	return HitResult;
 }
 
