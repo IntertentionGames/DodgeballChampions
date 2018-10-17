@@ -61,8 +61,8 @@ void UGrabber::Grab()
 		PhysicsHandle->GrabComponentAtLocationWithRotation(
 			ComponentToGrab,
 			NAME_None,
-			ComponentToGrab->GetOwner()->GetActorLocation(),
-			ComponentToGrab->GetOwner()->GetActorRotation()
+			ComponentToGrab->GetOwner()->GetActorLocation() + (0,0,-70),
+			ComponentToGrab->GetOwner()->GetActorRotation()*0
 		);
 	}
 }
