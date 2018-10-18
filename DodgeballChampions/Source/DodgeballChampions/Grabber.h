@@ -29,7 +29,7 @@ public:
     
     
 private:
-	float Reach = 300;
+	float Reach = 350;
 
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
 
